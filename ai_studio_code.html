@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umrah Package Poster Maker</title>
+    <!-- Font Awesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #004aad; /* Royal Blue */
+            --secondary: #1e3c72; /* Darker Blue */
+            --accent: #ffd700; /* Gold */
+            --text-dark: #333;
+            --white: #fff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- SIDEBAR (CONTROLS) --- */
+        .controls {
+            width: 350px;
+            background: #fff;
+            padding: 20px;
+            overflow-y: auto;
+            border-right: 1px solid #ccc;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        .controls h2 { margin-bottom: 20px; color: var(--primary); }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 5px; color: #555; }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        
+        .section-title {
+            background: #eee;
+            padding: 8px;
+            margin: 20px -20px 10px -20px;
+            font-weight: bold;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .btn-download {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+        .btn-download:hover { background-color: #218838; }
+
+        /* --- PREVIEW AREA --- */
+        .preview-area {
+            flex: 1;
+            background: #555;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: auto;
+        }
+
+        /* --- POSTER DESIGN --- */
+        #poster {
+            width: 800px; /* Fixed width for consistency */
+            height: 1131px; /* A4 Ratio approx */
+            background: white;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .poster-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
+            position: relative;
+            height: 200px;
+        }
+        
+        /* Decorative shape */
+        .header-curve {
+            position: absolute;
+            top: 0; right: 0;
+            width: 50%; height: 100%;
+            background: rgba(255,255,255,0.1);
+            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+        }
+
+        .top-contact {
+            text-align: right;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--accent);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .main-title h1 { font-size: 50px; line-height: 1; text-transform: uppercase; }
+        .main-title h2 { font-size: 30px; font-weight: 300; color: var(--accent); }
+        .days-badge {
+            background: var(--accent);
+            color: var(--primary);
+            display: inline-block;
+            padding: 0 10px;
+            font-weight: 800;
+            font-size: 30px;
+            border-radius: 4px;
+            vertical-align: middle;
+        }
+
+        /* Info Bar */
+        .info-bar {
+            background: #eef4fa;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid var(--accent);
+        }
+        .dates-box { font-size: 14px; color: var(--secondary); font-weight: 600; width: 60%; }
+        .airline-box { text-align: right; width: 35%; color: #006400; font-weight: bold; display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
+        .airline-box i { font-size: 24px; }
+
+        /* Rates Strip */
+        .rates-strip {
+            background: var(--accent);
+            text-align: center;
+            padding: 8px;
+            font-weight: 800;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        .rate-item span { background: #000; color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 14px; margin-left: 5px; }
+
+        /* Packages Grid */
+        .packages-grid {
+            flex: 1;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 15px;
+            background-color: #f4f8fb;
+        }
+
+        .pkg-card {
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pkg-header {
+            background: var(--secondary);
+            color: white;
+            text-align: center;
+            padding: 8px;
+            font-weight: bold;
+            font-size: 18px;
+            text-transform: uppercase;
+        }
+
+        .hotel-info {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            padding: 10px 5px;
+            text-align: center;
+            font-size: 12px;
+            background: #fff;
+        }
+        .hotel-col { width: 50%; padding: 0 5px; }
+        .hotel-col h4 { color: #d32f2f; margin-bottom: 2px; }
+        .divider { width: 1px; background: #ddd; }
+
+        .price-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 10px;
+            gap: 10px;
+            flex: 1;
+            align-content: center;
+        }
+
+        .price-item {
+            text-align: center;
+        }
+        .price-label { font-size: 12px; font-weight: bold; color: #555; text-transform: uppercase; }
+        .price-val { font-size: 20px; font-weight: 800; color: #d32f2f; }
+
+        .pkg-footer {
+             text-align: center;
+             font-size: 10px;
+             color: #777;
+             padding-bottom: 5px;
+        }
+
+        /* Footer */
+        .poster-footer {
+            background: var(--secondary);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="controls">
+        <h2>Poster Builder</h2>
+        
+        <div class="form-group">
+            <label>Contact Number</label>
+            <input type="text" id="in-contact" value="0321 3232321" oninput="updatePoster()">
+        </div>
+
+        <div class="form-group">
+            <label>Company/Title</label>
+            <input type="text" id="in-title" value="PIA Pvt. Ltd" oninput="updatePoster()">
+        </div>
+
+        <div class="form-group">
+            <label>Travel Dates Info</label>
+            <textarea id="in-dates" rows="2" oninput="updatePoster()">PEW-JED-PEW (12-21 DEC) &#10;ISB-JED-ISB (01-08 DEC)</textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Child / Infant Rates</label>
+            <div style="display:flex; gap:5px;">
+                <input type="text" id="in-child" value="205,000" placeholder="Child" oninput="updatePoster()">
+                <input type="text" id="in-infant" value="95,000" placeholder="Infant" oninput="updatePoster()">
+            </div>
+        </div>
+
+        <!-- Package 1 Editor -->
+        <div class="section-title">Package 1 (Economy)</div>
+        <div class="form-group">
+            <label>Makkah Hotel</label>
+            <input type="text" id="p1-makkah" value="Sadaf Al Khair" oninput="updatePoster()">
+        </div>
+        <div class="form-group">
+            <label>Madina Hotel</label>
+            <input type="text" id="p1-madina" value="Shaza Al Munawara" oninput="updatePoster()">
+        </div>
+        <div class="form-group">
+            <label>Prices (Sharing / 4Bed / 3Bed / 2Bed)</label>
+            <input type="text" id="p1-share" value="286,000" placeholder="Sharing" oninput="updatePoster()" style="margin-bottom:2px">
+            <input type="text" id="p1-4bed" value="295,000" placeholder="4 Bed" oninput="updatePoster()" style="margin-bottom:2px">
+            <input type="text" id="p1-3bed" value="313,000" placeholder="3 Bed" oninput="updatePoster()" style="margin-bottom:2px">
+            <input type="text" id="p1-2bed" value="344,000" placeholder="2 Bed" oninput="updatePoster()">
+        </div>
+
+        <!-- Package 2 Editor -->
+        <div class="section-title">Package 2 (Economy Plus)</div>
+        <div class="form-group">
+            <label>Makkah Hotel</label>
+            <input type="text" id="p2-makkah" value="Emaar Al Khair" oninput="updatePoster()">
+        </div>
+        <div class="form-group">
+            <label>Prices (Sharing / 4Bed / 3Bed / 2Bed)</label>
+            <input type="text" id="p2-share" value="300,000" oninput="updatePoster()" style="margin-bottom:2px">
+            <input type="text" id="p2-4bed" value="312,000" oninput="updatePoster()" style="margin-bottom:2px">
+            <input type="text" id="p2-3bed" value="337,000" oninput="updatePoster()" style="margin-bottom:2px">
+            <input type="text" id="p2-2bed" value="378,000" oninput="updatePoster()">
+        </div>
+
+        <button class="btn-download" onclick="downloadPoster()">Download Image</button>
+        <p style="font-size:11px; color:#777; text-align:center; margin-top:5px;">Note: Packages 3 & 4 can be edited in code or extended similarly.</p>
+    </div>
+
+    <!-- Preview Area -->
+    <div class="preview-area">
+        <div id="poster">
+            <!-- Header -->
+            <div class="poster-header">
+                <div class="header-curve"></div>
+                <div class="top-contact" id="out-contact">0321 3232321</div>
+                <div class="main-title" style="margin-top: 20px;">
+                    <h1 id="out-title">PIA Pvt. Ltd</h1>
+                    <h2>Umrah <span class="days-badge">21</span> Days Packages</h2>
+                </div>
+            </div>
+
+            <!-- Info Bar -->
+            <div class="info-bar">
+                <div class="dates-box" id="out-dates">
+                    PEW-JED-PEW (12-21 DEC)<br>
+                    ISB-JED-ISB (01-08 DEC)
+                </div>
+                <div class="airline-box">
+                    <i class="fas fa-plane-departure"></i> SAUDI AIRLINES
+                </div>
+            </div>
+
+            <!-- Rates Strip -->
+            <div class="rates-strip">
+                <div class="rate-item">Child (No Bed): <span id="out-child">205,000</span></div>
+                <div class="rate-item">Infant: <span id="out-infant">95,000</span></div>
+            </div>
+
+            <!-- Packages Grid -->
+            <div class="packages-grid">
+                
+                <!-- Package 1 -->
+                <div class="pkg-card">
+                    <div class="pkg-header">Economy PKG-1</div>
+                    <div class="hotel-info">
+                        <div class="hotel-col">
+                            <h4>MAKKAH</h4>
+                            <div id="out-p1-makkah">Sadaf Al Khair</div>
+                            <small>(850m)</small>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="hotel-col">
+                            <h4>MADINA</h4>
+                            <div id="out-p1-madina">Shaza Al Munawara</div>
+                            <small>(900m)</small>
+                        </div>
+                    </div>
+                    <div class="price-grid">
+                        <div class="price-item"><div class="price-label">Sharing</div><div class="price-val" id="out-p1-share">286,000</div></div>
+                        <div class="price-item"><div class="price-label">4-Bed</div><div class="price-val" id="out-p1-4bed">295,000</div></div>
+                        <div class="price-item"><div class="price-label">3-Bed</div><div class="price-val" id="out-p1-3bed">313,000</div></div>
+                        <div class="price-item"><div class="price-label">2-Bed</div><div class="price-val" id="out-p1-2bed">344,000</div></div>
+                    </div>
+                </div>
+
+                <!-- Package 2 -->
+                <div class="pkg-card">
+                    <div class="pkg-header">Economy Plus PKG-2</div>
+                    <div class="hotel-info">
+                        <div class="hotel-col">
+                            <h4>MAKKAH</h4>
+                            <div id="out-p2-makkah">Emaar Al Khair</div>
+                            <small>(700m)</small>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="hotel-col">
+                            <h4>MADINA</h4>
+                            <div>Shaza Al Munawara</div>
+                            <small>(900m)</small>
+                        </div>
+                    </div>
+                    <div class="price-grid">
+                        <div class="price-item"><div class="price-label">Sharing</div><div class="price-val" id="out-p2-share">300,000</div></div>
+                        <div class="price-item"><div class="price-label">4-Bed</div><div class="price-val" id="out-p2-4bed">312,000</div></div>
+                        <div class="price-item"><div class="price-label">3-Bed</div><div class="price-val" id="out-p2-3bed">337,000</div></div>
+                        <div class="price-item"><div class="price-label">2-Bed</div><div class="price-val" id="out-p2-2bed">378,000</div></div>
+                    </div>
+                </div>
+
+                <!-- Package 3 (Static for Demo) -->
+                <div class="pkg-card">
+                    <div class="pkg-header">Economy Plus PKG-3</div>
+                    <div class="hotel-info">
+                        <div class="hotel-col">
+                            <h4>MAKKAH</h4>
+                            <div>Shrook Al Msk</div>
+                            <small>(550m)</small>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="hotel-col">
+                            <h4>MADINA</h4>
+                            <div>Markazia</div>
+                            <small>(200m)</small>
+                        </div>
+                    </div>
+                    <div class="price-grid">
+                        <div class="price-item"><div class="price-label">5-Bed</div><div class="price-val">335,000</div></div>
+                        <div class="price-item"><div class="price-label">4-Bed</div><div class="price-val">355,000</div></div>
+                        <div class="price-item"><div class="price-label">3-Bed</div><div class="price-val">394,000</div></div>
+                        <div class="price-item"><div class="price-label">2-Bed</div><div class="price-val">462,000</div></div>
+                    </div>
+                </div>
+
+                <!-- Package 4 (Static for Demo) -->
+                <div class="pkg-card">
+                    <div class="pkg-header">Standard PKG-4</div>
+                    <div class="hotel-info">
+                        <div class="hotel-col">
+                            <h4>MAKKAH</h4>
+                            <div>Yasmin Al Majd</div>
+                            <small>(550m)</small>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="hotel-col">
+                            <h4>MADINA</h4>
+                            <div>Markazia</div>
+                            <small>(200m)</small>
+                        </div>
+                    </div>
+                    <div class="price-grid">
+                        <div class="price-item"><div class="price-label">5-Bed</div><div class="price-val">Nill</div></div>
+                        <div class="price-item"><div class="price-label">4-Bed</div><div class="price-val">360,000</div></div>
+                        <div class="price-item"><div class="price-label">3-Bed</div><div class="price-val">399,000</div></div>
+                        <div class="price-item"><div class="price-label">2-Bed</div><div class="price-val">469,000</div></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer -->
+            <div class="poster-footer">
+                14 Nights Makkah | 06 Nights Madina | Contact for Custom Packages
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script>
+        function updatePoster() {
+            // General Info
+            document.getElementById('out-contact').innerText = document.getElementById('in-contact').value;
+            document.getElementById('out-title').innerText = document.getElementById('in-title').value;
+            document.getElementById('out-dates').innerText = document.getElementById('in-dates').value; // Using innerText to preserve line breaks if using styling that supports it, or replace \n with <br>
+            document.getElementById('out-dates').innerHTML = document.getElementById('in-dates').value.replace(/\n/g, '<br>');
+            document.getElementById('out-child').innerText = document.getElementById('in-child').value;
+            document.getElementById('out-infant').innerText = document.getElementById('in-infant').value;
+
+            // Package 1 Updates
+            document.getElementById('out-p1-makkah').innerText = document.getElementById('p1-makkah').value;
+            document.getElementById('out-p1-madina').innerText = document.getElementById('p1-madina').value;
+            document.getElementById('out-p1-share').innerText = document.getElementById('p1-share').value;
+            document.getElementById('out-p1-4bed').innerText = document.getElementById('p1-4bed').value;
+            document.getElementById('out-p1-3bed').innerText = document.getElementById('p1-3bed').value;
+            document.getElementById('out-p1-2bed').innerText = document.getElementById('p1-2bed').value;
+
+            // Package 2 Updates
+            document.getElementById('out-p2-makkah').innerText = document.getElementById('p2-makkah').value;
+            document.getElementById('out-p2-share').innerText = document.getElementById('p2-share').value;
+            document.getElementById('out-p2-4bed').innerText = document.getElementById('p2-4bed').value;
+            document.getElementById('out-p2-3bed').innerText = document.getElementById('p2-3bed').value;
+            document.getElementById('out-p2-2bed').innerText = document.getElementById('p2-2bed').value;
+        }
+
+        function downloadPoster() {
+            const posterNode = document.getElementById('poster');
+            
+            // Use html2canvas to capture the poster div
+            html2canvas(posterNode, {
+                scale: 2, // Improves resolution (2x)
+                useCORS: true // Helps if you use external images
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'umrah-package-poster.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
+    </script>
+</body>
+</html>
