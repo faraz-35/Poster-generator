@@ -357,14 +357,14 @@ PEW-JED-PEW (12-21 DEC) &#10;ISB-JED-ISB (01-08 DEC)</textarea
                     <input
                         type="text"
                         id="in-child"
-                        value="205,000"
+                        value="212,000"
                         placeholder="Child"
                         oninput="updatePoster()"
                     />
                     <input
                         type="text"
                         id="in-infant"
-                        value="95,000"
+                        value="102,000"
                         placeholder="Infant"
                         oninput="updatePoster()"
                     />
@@ -405,7 +405,7 @@ PEW-JED-PEW (12-21 DEC) &#10;ISB-JED-ISB (01-08 DEC)</textarea
                 <input
                     type="text"
                     id="p1-share"
-                    value="286,000"
+                    value="293,000"
                     placeholder="Sharing"
                     oninput="updatePoster()"
                     style="margin-bottom: 2px"
@@ -413,7 +413,7 @@ PEW-JED-PEW (12-21 DEC) &#10;ISB-JED-ISB (01-08 DEC)</textarea
                 <input
                     type="text"
                     id="p1-4bed"
-                    value="295,000"
+                    value="302,000"
                     placeholder="4 Bed"
                     oninput="updatePoster()"
                     style="margin-bottom: 2px"
@@ -421,7 +421,7 @@ PEW-JED-PEW (12-21 DEC) &#10;ISB-JED-ISB (01-08 DEC)</textarea
                 <input
                     type="text"
                     id="p1-3bed"
-                    value="313,000"
+                    value="320,000"
                     placeholder="3 Bed"
                     oninput="updatePoster()"
                     style="margin-bottom: 2px"
@@ -429,7 +429,7 @@ PEW-JED-PEW (12-21 DEC) &#10;ISB-JED-ISB (01-08 DEC)</textarea
                 <input
                     type="text"
                     id="p1-2bed"
-                    value="344,000"
+                    value="351,000"
                     placeholder="2 Bed"
                     oninput="updatePoster()"
                 />
@@ -469,28 +469,28 @@ PEW-JED-PEW (12-21 DEC) &#10;ISB-JED-ISB (01-08 DEC)</textarea
                 <input
                     type="text"
                     id="p2-share"
-                    value="300,000"
+                    value="307,000"
                     oninput="updatePoster()"
                     style="margin-bottom: 2px"
                 />
                 <input
                     type="text"
                     id="p2-4bed"
-                    value="312,000"
+                    value="319,000"
                     oninput="updatePoster()"
                     style="margin-bottom: 2px"
                 />
                 <input
                     type="text"
                     id="p2-3bed"
-                    value="337,000"
+                    value="344,000"
                     oninput="updatePoster()"
                     style="margin-bottom: 2px"
                 />
                 <input
                     type="text"
                     id="p2-2bed"
-                    value="378,000"
+                    value="385,000"
                     oninput="updatePoster()"
                 />
             </div>
@@ -529,28 +529,28 @@ PEW-JED-PEW (12-21 DEC) &#10;ISB-JED-ISB (01-08 DEC)</textarea
                 <input
                     type="text"
                     id="p3-5bed"
-                    value="335,000"
+                    value="342,000"
                     oninput="updatePoster()"
                     style="margin-bottom: 2px"
                 />
                 <input
                     type="text"
                     id="p3-4bed"
-                    value="355,000"
+                    value="362,000"
                     oninput="updatePoster()"
                     style="margin-bottom: 2px"
                 />
                 <input
                     type="text"
                     id="p3-3bed"
-                    value="394,000"
+                    value="401,000"
                     oninput="updatePoster()"
                     style="margin-bottom: 2px"
                 />
                 <input
                     type="text"
                     id="p3-2bed"
-                    value="462,000"
+                    value="469,000"
                     oninput="updatePoster()"
                 />
             </div>
@@ -589,28 +589,28 @@ PEW-JED-PEW (12-21 DEC) &#10;ISB-JED-ISB (01-08 DEC)</textarea
                 <input
                     type="text"
                     id="p4-5bed"
-                    value="Nill"
+                    value="-"
                     oninput="updatePoster()"
                     style="margin-bottom: 2px"
                 />
                 <input
                     type="text"
                     id="p4-4bed"
-                    value="360,000"
+                    value="367,000"
                     oninput="updatePoster()"
                     style="margin-bottom: 2px"
                 />
                 <input
                     type="text"
                     id="p4-3bed"
-                    value="399,000"
+                    value="406,000"
                     oninput="updatePoster()"
                     style="margin-bottom: 2px"
                 />
                 <input
                     type="text"
                     id="p4-2bed"
-                    value="469,000"
+                    value="476,000"
                     oninput="updatePoster()"
                 />
             </div>
@@ -650,10 +650,10 @@ PEW-JED-PEW (12-21 DEC) &#10;ISB-JED-ISB (01-08 DEC)</textarea
                 <!-- Rates Strip -->
                 <div class="rates-strip">
                     <div class="rate-item">
-                        Child (No Bed): <span id="out-child">205,000</span>
+                        Child (No Bed): <span id="out-child">212,000</span>
                     </div>
                     <div class="rate-item">
-                        Infant: <span id="out-infant">95,000</span>
+                        Infant: <span id="out-infant">102,000</span>
                     </div>
                 </div>
 
@@ -950,6 +950,11 @@ PEW-JED-PEW (12-21 DEC) &#10;ISB-JED-ISB (01-08 DEC)</textarea
                     link.click();
                 });
             }
+
+            // Initialize the poster with default values when page loads
+            window.addEventListener("DOMContentLoaded", function () {
+                updatePoster();
+            });
         </script>
     </body>
 </html>
