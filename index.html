@@ -373,6 +373,15 @@ PEW-JED-PEW (12-21 DEC) &#10;ISB-JED-ISB (01-08 DEC)</textarea
             <!-- Package 1 Editor -->
             <div class="section-title">Package 1 (Economy)</div>
             <div class="form-group">
+                <label>Package Name</label>
+                <input
+                    type="text"
+                    id="p1-name"
+                    value="Economy PKG-1"
+                    oninput="updatePoster()"
+                />
+            </div>
+            <div class="form-group">
                 <label>Makkah Hotel</label>
                 <input
                     type="text"
@@ -428,11 +437,29 @@ PEW-JED-PEW (12-21 DEC) &#10;ISB-JED-ISB (01-08 DEC)</textarea
             <!-- Package 2 Editor -->
             <div class="section-title">Package 2 (Economy Plus)</div>
             <div class="form-group">
+                <label>Package Name</label>
+                <input
+                    type="text"
+                    id="p2-name"
+                    value="Economy Plus PKG-2"
+                    oninput="updatePoster()"
+                />
+            </div>
+            <div class="form-group">
                 <label>Makkah Hotel</label>
                 <input
                     type="text"
                     id="p2-makkah"
                     value="Emaar Al Khair"
+                    oninput="updatePoster()"
+                />
+            </div>
+            <div class="form-group">
+                <label>Madina Hotel</label>
+                <input
+                    type="text"
+                    id="p2-madina"
+                    value="Shaza Al Munawara"
                     oninput="updatePoster()"
                 />
             </div>
@@ -467,20 +494,129 @@ PEW-JED-PEW (12-21 DEC) &#10;ISB-JED-ISB (01-08 DEC)</textarea
                 />
             </div>
 
+            <!-- Package 3 Editor -->
+            <div class="section-title">Package 3 (Economy Plus)</div>
+            <div class="form-group">
+                <label>Package Name</label>
+                <input
+                    type="text"
+                    id="p3-name"
+                    value="Economy Plus PKG-3"
+                    oninput="updatePoster()"
+                />
+            </div>
+            <div class="form-group">
+                <label>Makkah Hotel</label>
+                <input
+                    type="text"
+                    id="p3-makkah"
+                    value="Shrook Al Msk"
+                    oninput="updatePoster()"
+                />
+            </div>
+            <div class="form-group">
+                <label>Madina Hotel</label>
+                <input
+                    type="text"
+                    id="p3-madina"
+                    value="Markazia"
+                    oninput="updatePoster()"
+                />
+            </div>
+            <div class="form-group">
+                <label>Prices (5Bed / 4Bed / 3Bed / 2Bed)</label>
+                <input
+                    type="text"
+                    id="p3-5bed"
+                    value="335,000"
+                    oninput="updatePoster()"
+                    style="margin-bottom: 2px"
+                />
+                <input
+                    type="text"
+                    id="p3-4bed"
+                    value="355,000"
+                    oninput="updatePoster()"
+                    style="margin-bottom: 2px"
+                />
+                <input
+                    type="text"
+                    id="p3-3bed"
+                    value="394,000"
+                    oninput="updatePoster()"
+                    style="margin-bottom: 2px"
+                />
+                <input
+                    type="text"
+                    id="p3-2bed"
+                    value="462,000"
+                    oninput="updatePoster()"
+                />
+            </div>
+
+            <!-- Package 4 Editor -->
+            <div class="section-title">Package 4 (Standard)</div>
+            <div class="form-group">
+                <label>Package Name</label>
+                <input
+                    type="text"
+                    id="p4-name"
+                    value="Standard PKG-4"
+                    oninput="updatePoster()"
+                />
+            </div>
+            <div class="form-group">
+                <label>Makkah Hotel</label>
+                <input
+                    type="text"
+                    id="p4-makkah"
+                    value="Yasmin Al Majd"
+                    oninput="updatePoster()"
+                />
+            </div>
+            <div class="form-group">
+                <label>Madina Hotel</label>
+                <input
+                    type="text"
+                    id="p4-madina"
+                    value="Markazia"
+                    oninput="updatePoster()"
+                />
+            </div>
+            <div class="form-group">
+                <label>Prices (5Bed / 4Bed / 3Bed / 2Bed)</label>
+                <input
+                    type="text"
+                    id="p4-5bed"
+                    value="Nill"
+                    oninput="updatePoster()"
+                    style="margin-bottom: 2px"
+                />
+                <input
+                    type="text"
+                    id="p4-4bed"
+                    value="360,000"
+                    oninput="updatePoster()"
+                    style="margin-bottom: 2px"
+                />
+                <input
+                    type="text"
+                    id="p4-3bed"
+                    value="399,000"
+                    oninput="updatePoster()"
+                    style="margin-bottom: 2px"
+                />
+                <input
+                    type="text"
+                    id="p4-2bed"
+                    value="469,000"
+                    oninput="updatePoster()"
+                />
+            </div>
+
             <button class="btn-download" onclick="downloadPoster()">
                 Download Image
             </button>
-            <p
-                style="
-                    font-size: 11px;
-                    color: #777;
-                    text-align: center;
-                    margin-top: 5px;
-                "
-            >
-                Note: Packages 3 & 4 can be edited in code or extended
-                similarly.
-            </p>
         </div>
 
         <!-- Preview Area -->
@@ -489,9 +625,9 @@ PEW-JED-PEW (12-21 DEC) &#10;ISB-JED-ISB (01-08 DEC)</textarea
                 <!-- Header -->
                 <div class="poster-header">
                     <div class="header-curve"></div>
-                    <div class="top-contact" id="out-contact">0321 3232321</div>
+                    <div class="top-contact" id="out-contact">03104442228</div>
                     <div class="main-title" style="margin-top: 20px">
-                        <h1 id="out-title">PIA Pvt. Ltd</h1>
+                        <h1 id="out-title">Visa Voyage</h1>
                         <h2>
                             Umrah <span class="days-badge">21</span> Days
                             Packages
@@ -524,7 +660,9 @@ PEW-JED-PEW (12-21 DEC) &#10;ISB-JED-ISB (01-08 DEC)</textarea
                 <div class="packages-grid">
                     <!-- Package 1 -->
                     <div class="pkg-card">
-                        <div class="pkg-header">Economy PKG-1</div>
+                        <div class="pkg-header" id="out-p1-name">
+                            Economy PKG-1
+                        </div>
                         <div class="hotel-info">
                             <div class="hotel-col">
                                 <h4>MAKKAH</h4>
@@ -568,7 +706,9 @@ PEW-JED-PEW (12-21 DEC) &#10;ISB-JED-ISB (01-08 DEC)</textarea
 
                     <!-- Package 2 -->
                     <div class="pkg-card">
-                        <div class="pkg-header">Economy Plus PKG-2</div>
+                        <div class="pkg-header" id="out-p2-name">
+                            Economy Plus PKG-2
+                        </div>
                         <div class="hotel-info">
                             <div class="hotel-col">
                                 <h4>MAKKAH</h4>
@@ -578,7 +718,7 @@ PEW-JED-PEW (12-21 DEC) &#10;ISB-JED-ISB (01-08 DEC)</textarea
                             <div class="divider"></div>
                             <div class="hotel-col">
                                 <h4>MADINA</h4>
-                                <div>Shaza Al Munawara</div>
+                                <div id="out-p2-madina">Shaza Al Munawara</div>
                                 <small>(900m)</small>
                             </div>
                         </div>
@@ -610,74 +750,94 @@ PEW-JED-PEW (12-21 DEC) &#10;ISB-JED-ISB (01-08 DEC)</textarea
                         </div>
                     </div>
 
-                    <!-- Package 3 (Static for Demo) -->
+                    <!-- Package 3 -->
                     <div class="pkg-card">
-                        <div class="pkg-header">Economy Plus PKG-3</div>
+                        <div class="pkg-header" id="out-p3-name">
+                            Economy Plus PKG-3
+                        </div>
                         <div class="hotel-info">
                             <div class="hotel-col">
                                 <h4>MAKKAH</h4>
-                                <div>Shrook Al Msk</div>
+                                <div id="out-p3-makkah">Shrook Al Msk</div>
                                 <small>(550m)</small>
                             </div>
                             <div class="divider"></div>
                             <div class="hotel-col">
                                 <h4>MADINA</h4>
-                                <div>Markazia</div>
+                                <div id="out-p3-madina">Markazia</div>
                                 <small>(200m)</small>
                             </div>
                         </div>
                         <div class="price-grid">
                             <div class="price-item">
                                 <div class="price-label">5-Bed</div>
-                                <div class="price-val">335,000</div>
+                                <div class="price-val" id="out-p3-5bed">
+                                    335,000
+                                </div>
                             </div>
                             <div class="price-item">
                                 <div class="price-label">4-Bed</div>
-                                <div class="price-val">355,000</div>
+                                <div class="price-val" id="out-p3-4bed">
+                                    355,000
+                                </div>
                             </div>
                             <div class="price-item">
                                 <div class="price-label">3-Bed</div>
-                                <div class="price-val">394,000</div>
+                                <div class="price-val" id="out-p3-3bed">
+                                    394,000
+                                </div>
                             </div>
                             <div class="price-item">
                                 <div class="price-label">2-Bed</div>
-                                <div class="price-val">462,000</div>
+                                <div class="price-val" id="out-p3-2bed">
+                                    462,000
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Package 4 (Static for Demo) -->
+                    <!-- Package 4 -->
                     <div class="pkg-card">
-                        <div class="pkg-header">Standard PKG-4</div>
+                        <div class="pkg-header" id="out-p4-name">
+                            Standard PKG-4
+                        </div>
                         <div class="hotel-info">
                             <div class="hotel-col">
                                 <h4>MAKKAH</h4>
-                                <div>Yasmin Al Majd</div>
+                                <div id="out-p4-makkah">Yasmin Al Majd</div>
                                 <small>(550m)</small>
                             </div>
                             <div class="divider"></div>
                             <div class="hotel-col">
                                 <h4>MADINA</h4>
-                                <div>Markazia</div>
+                                <div id="out-p4-madina">Markazia</div>
                                 <small>(200m)</small>
                             </div>
                         </div>
                         <div class="price-grid">
                             <div class="price-item">
                                 <div class="price-label">5-Bed</div>
-                                <div class="price-val">Nill</div>
+                                <div class="price-val" id="out-p4-5bed">
+                                    Nill
+                                </div>
                             </div>
                             <div class="price-item">
                                 <div class="price-label">4-Bed</div>
-                                <div class="price-val">360,000</div>
+                                <div class="price-val" id="out-p4-4bed">
+                                    360,000
+                                </div>
                             </div>
                             <div class="price-item">
                                 <div class="price-label">3-Bed</div>
-                                <div class="price-val">399,000</div>
+                                <div class="price-val" id="out-p4-3bed">
+                                    399,000
+                                </div>
                             </div>
                             <div class="price-item">
                                 <div class="price-label">2-Bed</div>
-                                <div class="price-val">469,000</div>
+                                <div class="price-val" id="out-p4-2bed">
+                                    469,000
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -711,6 +871,8 @@ PEW-JED-PEW (12-21 DEC) &#10;ISB-JED-ISB (01-08 DEC)</textarea
                     document.getElementById("in-infant").value;
 
                 // Package 1 Updates
+                document.getElementById("out-p1-name").innerText =
+                    document.getElementById("p1-name").value;
                 document.getElementById("out-p1-makkah").innerText =
                     document.getElementById("p1-makkah").value;
                 document.getElementById("out-p1-madina").innerText =
@@ -725,8 +887,12 @@ PEW-JED-PEW (12-21 DEC) &#10;ISB-JED-ISB (01-08 DEC)</textarea
                     document.getElementById("p1-2bed").value;
 
                 // Package 2 Updates
+                document.getElementById("out-p2-name").innerText =
+                    document.getElementById("p2-name").value;
                 document.getElementById("out-p2-makkah").innerText =
                     document.getElementById("p2-makkah").value;
+                document.getElementById("out-p2-madina").innerText =
+                    document.getElementById("p2-madina").value;
                 document.getElementById("out-p2-share").innerText =
                     document.getElementById("p2-share").value;
                 document.getElementById("out-p2-4bed").innerText =
@@ -735,6 +901,38 @@ PEW-JED-PEW (12-21 DEC) &#10;ISB-JED-ISB (01-08 DEC)</textarea
                     document.getElementById("p2-3bed").value;
                 document.getElementById("out-p2-2bed").innerText =
                     document.getElementById("p2-2bed").value;
+
+                // Package 3 Updates
+                document.getElementById("out-p3-name").innerText =
+                    document.getElementById("p3-name").value;
+                document.getElementById("out-p3-makkah").innerText =
+                    document.getElementById("p3-makkah").value;
+                document.getElementById("out-p3-madina").innerText =
+                    document.getElementById("p3-madina").value;
+                document.getElementById("out-p3-5bed").innerText =
+                    document.getElementById("p3-5bed").value;
+                document.getElementById("out-p3-4bed").innerText =
+                    document.getElementById("p3-4bed").value;
+                document.getElementById("out-p3-3bed").innerText =
+                    document.getElementById("p3-3bed").value;
+                document.getElementById("out-p3-2bed").innerText =
+                    document.getElementById("p3-2bed").value;
+
+                // Package 4 Updates
+                document.getElementById("out-p4-name").innerText =
+                    document.getElementById("p4-name").value;
+                document.getElementById("out-p4-makkah").innerText =
+                    document.getElementById("p4-makkah").value;
+                document.getElementById("out-p4-madina").innerText =
+                    document.getElementById("p4-madina").value;
+                document.getElementById("out-p4-5bed").innerText =
+                    document.getElementById("p4-5bed").value;
+                document.getElementById("out-p4-4bed").innerText =
+                    document.getElementById("p4-4bed").value;
+                document.getElementById("out-p4-3bed").innerText =
+                    document.getElementById("p4-3bed").value;
+                document.getElementById("out-p4-2bed").innerText =
+                    document.getElementById("p4-2bed").value;
             }
 
             function downloadPoster() {
